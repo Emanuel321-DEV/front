@@ -12,8 +12,7 @@ export const theme = extendTheme({
     styles: {
         global: {
             body: {
-                backgroundColor: '#fff',
-                opacity: 0.7
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
             }
         }
     }

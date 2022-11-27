@@ -11,11 +11,11 @@ export default function Home() {
 
     <Flex justifyContent="center" w="100vw" h="100vh">
       <Flex 
-      w="80vw" 
-      h="95vh" 
-      m="auto" 
-      justifyContent="space-evenly"
-    >
+        w="80vw" 
+        h="95vh" 
+        m="auto" 
+        justifyContent="space-evenly"
+      >
       <Flex direction="column" gap={3}>
         <Box h="80%">
           <Image src="/images/img-login.svg" objectFit="cover" alt="" height="500px"/>
