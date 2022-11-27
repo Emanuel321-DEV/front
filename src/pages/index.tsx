@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
 
-    <Flex justifyContent="center" w="100vw" h="100vh">
+    <Flex justifyContent="center" w="100vw" h="100vh" bg="#ffffffb3">
       <Flex 
         w="80vw" 
         h="95vh" 
@@ -25,42 +25,50 @@ export default function Home() {
           <Heading as="h1" color="principalColor" >
             Bem vindo ao Ponto Go
           </Heading>
-          <Text color="principalColor">Aqui voce fará toda gestão do seu sistema de pontos</Text>
+          <Text color="principalColor" w="381px" textAlign="center" mt={1}>Aqui voce fará toda gestão do  <br />seu sistema de pontos</Text>
         </Box>
       
       </Flex>
 
-      <Flex direction="column" gap={2} justifyContent="center">
+      <Flex direction="column"justifyContent="center">
         <Image src="/images/logo-pontogo.svg" alt="" />
-        <Heading as="h1" color="principalColor" >Faça login</Heading>
+        <Heading as="h1" color="principalColor" my={5} >Faça login</Heading>
         
         <label htmlFor="email">Email</label>
         <Input
           id="email"
           type="email"
+          border="1px"
+          borderColor="gray.400"
+          bg="white"
           placeholder='exemplo@gmail.com'
-          _placeholder={{ opacity: 1, color: 'gray.500' }}
+          _placeholder={{ opacity: 1, color: 'gray4500' }}
+          mb={5}
         />
         
         <label htmlFor="password">Senha</label>
         <InputGroup size='md'>
           <Input
+            id="password"
+            bg="white"
+            border="1px"
+            borderColor="gray.400"
             pr='4.5rem'
             type={show ? 'text' : 'password'}
             placeholder='*********'
           />
           <InputRightElement width='4.5rem'>
-            <Button h='1.75rem' size='sm' onClick={handleClick}>
+            <Button h='1.75rem' size='sm' onClick={handleClick} bg="transparent">
               <ViewIcon color="principalColor"/>
             </Button>
           </InputRightElement>
         </InputGroup>    
 
-        <Text color="principalColor">
+        <Text color="principalColor" my={5}>
           Esqueci minha senha
         </Text>
 
-        <Button bg="principalColor" color="white">
+        <Button bg="principalColor" _hover={{ background: "#26046e" }} color="white">
           Entrar
         </Button>
 

@@ -18,7 +18,7 @@ export function BasicUsage() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
-        <Button onClick={onOpen}>Open Modal</Button>
+        <Button onClick={onOpen} w="200px" h="50px" color="white" bg="principalColor" _hover={{ background: "#26046e" }} fontWeight="normal">Registrar ponto</Button>
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -34,13 +34,15 @@ export function BasicUsage() {
             </ModalBody>
   
             <ModalFooter display="flex" flexDirection="column" gap={2} mb={10}>
+              
               <Button border="1px" bg="white" borderColor="principalColor" onClick={onClose} backgroundColor="principalColor" color="white" w="200px" h="50px">
                 Bater ponto
-              
               </Button>
+
               <Button border="1px" bg="white" borderColor="principalColor" onClick={onClose} color="principalColor" w="200px" h="50px">
                 Cancelar
               </Button>
+              
             </ModalFooter>
           </ModalContent>
         </Modal>

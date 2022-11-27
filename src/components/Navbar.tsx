@@ -1,6 +1,6 @@
 import { Box, Flex, Text, Image } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import {} from "@chakra-ui/icons";
+
 
 interface NavbarProps {
     icon: ReactNode;
@@ -10,7 +10,7 @@ interface NavbarProps {
 export function Navbar( { icon, title }: NavbarProps ){
     return (
 
-        <Flex h="100vh" w="180px" flexDirection="column" justifyContent="space-between">
+        <Flex h="100vh" w="180px" flexDirection="column" justifyContent="space-between" bg="white">
             
             <Flex flexDirection="column">
                 <Box py={8}>
