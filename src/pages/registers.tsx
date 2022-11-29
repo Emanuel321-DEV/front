@@ -5,8 +5,25 @@ import { BasicUsage } from "../components/ModalButton";
 import { Navbar } from "../components/Navbar";
 import { SlBookOpen } from "react-icons/sl";
 import { CardList } from "../components/CardList";
+import { api } from "../services/api";
+import { parseCookies } from "nookies";
+import { useQuery } from "react-query";
 
 export default function Register(){
+    const { data, isError, isFetching } = useQuery('registers-func', async () => {
+
+        const { 'next-auth-user': userinfo} = parseCookies();
+      
+        const convertUser = JSON.parse(userinfo);
+        
+        const res = await api.get(`/registered-time/${convertUser.id}`);
+        
+        console.log("RES ====", res)        
+        
+
+        return res.data;
+    });
+
     return(
         
         <Flex gap={5} width={700}>
@@ -15,9 +32,9 @@ export default function Register(){
             <Flex direction="column" mt={9} gap={5}>
                 
                 <BasicUsage />
-
-                <CardList />
-
+                {isFetching === true ? <h1>Aguarde</h1> : <CardList data={data}/>
+}
+                
             </Flex>
         
         </Flex>

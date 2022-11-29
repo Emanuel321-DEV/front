@@ -12,13 +12,28 @@ import {
     Text
   } from '@chakra-ui/react';
 import { TimeIcon } from "@chakra-ui/icons";
+import { parseCookies } from 'nookies';
+import { api } from '../services/api';
 
 export function BasicUsage() {
     
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    async function handleRegister (){
+
+      const { 'next-auth-user': userinfo} = parseCookies();
+      
+      const convertUser = JSON.parse(userinfo)
+
+
+      const res = await api.post('/registered-time', { user: convertUser.id })
+            
+      onClose();
+    }
+
     return (
       <>
-        <Button onClick={onOpen} w="200px" h="50px" color="white" bg="principalColor" _hover={{ background: "#26046e" }} fontWeight="normal">Registrar ponto</Button>
+        <Button onClick={onOpen} w="200px" h="50px" color="white" bg="principalColor" _hover={{ background: "#26046e" }} fontWeight="normal" >Registrar ponto</Button>
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay  bg='blackAlpha.300'
@@ -28,7 +43,7 @@ export function BasicUsage() {
             <ModalCloseButton />
             <ModalBody display="flex" flexDirection="column" alignItems="center" >
               <TimeIcon fontSize="6xl" color="principalColor"/>
-              <Heading m={2} as="h2" color="principalColor">
+              <Heading  m={2} as="h2" color="principalColor">
                 10:30
               </Heading>
               <Text>26/09/2021</Text>
@@ -36,7 +51,7 @@ export function BasicUsage() {
   
             <ModalFooter display="flex" flexDirection="column" gap={2} mb={10}>
               
-              <Button border="1px" bg="white" borderColor="principalColor" onClick={onClose} backgroundColor="principalColor" color="white" w="200px" h="50px">
+              <Button border="1px" bg="white" borderColor="principalColor" onClick={ () =>  handleRegister()} backgroundColor="principalColor" color="white" w="200px" h="50px">
                 Bater ponto
               </Button>
 

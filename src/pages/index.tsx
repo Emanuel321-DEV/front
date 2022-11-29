@@ -1,17 +1,25 @@
 import { Container, Box, Flex, Text, Heading, Image, TagLabel, Button, Input, InputGroup, InputRightElement, Icon, Hide } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ViewIcon } from "@chakra-ui/icons";
 import { api } from "../services/api";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Home() {
   const [ show, setShow ] = useState(false);
   const handleClick = () => setShow(!show);
-
+  
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   
+  const { Login, Logout } = useContext(AuthContext);
+
   async function handleSignIn(){
-    await api.post('auth/login', { email, password });
+    
+    console.log("REQUEST INTEND", email, password);
+    
+    await Login({ email, password });
+
+  
   }
 
 

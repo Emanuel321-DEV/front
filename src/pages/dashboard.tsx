@@ -10,7 +10,7 @@ import { api } from "../services/api";
 
 
 export default function Dashboard(){
-    const {} = useQuery('registers-func', async () => {
+    const { data, isError, isFetching } = useQuery('registers-func', async () => {
         const res = await api.get('/registered-time');
 
         return res.data;
@@ -25,7 +25,7 @@ export default function Dashboard(){
             <Flex direction="column" mt={9} gap={5}>
 
 
-                <CardList />
+            {isFetching === true ? <h1>Aguarde</h1> : <CardList data={data}/>}
 
             </Flex>
         

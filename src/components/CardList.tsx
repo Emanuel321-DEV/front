@@ -47,19 +47,19 @@ const users: User[] = [
   // ...
 ];
 
-export function CardList() {
+export function CardList({ data }) {
   // Control current Page
   const [page, setPage] = React.useState(1);
-
+  console.log("RECEBI ISTO NO DATA \n\n\n\n", data)
   // Formatter for each user
-  const tableData = users.map((user) => ({
+  const tableData = data.map((register) => ({
     colaborador: (
       <Flex align="center">
-        <Text>{user.colaborador}</Text>
+        <Text>{register.user.name}</Text>
       </Flex>
     ),
-    date: user.date,
-    hour: user.hour,
+    date: register.timeRegistered,
+    hour: register.hour,
 
   }));
 
