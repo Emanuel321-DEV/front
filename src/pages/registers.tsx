@@ -9,7 +9,7 @@ import { CardList } from "../components/CardList";
 export default function Register(){
     return(
         
-        <Flex gap={5}>
+        <Flex gap={5} width={700}>
             <Navbar title="Meus registros" icon={<Icon color="principalColor" as={SlBookOpen}/>}/>
             
             <Flex direction="column" mt={9} gap={5}>

@@ -4,10 +4,19 @@ import { CardItem } from "../components/CardItem";
 import { Navbar } from "../components/Navbar";
 import { RiDashboardLine } from "react-icons/ri";
 import { CardList } from "../components/CardList";
+import { useQuery } from "react-query";
+import { api } from "../services/api";
 
 
 
 export default function Dashboard(){
+    const {} = useQuery('registers-func', async () => {
+        const res = await api.get('/registered-time');
+
+        return res.data;
+    });
+
+
     return(
         
         <Flex gap={5}>

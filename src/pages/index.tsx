@@ -1,10 +1,18 @@
-import { Container, Box, Flex, Text, Heading, Image, TagLabel, Button, Input, InputGroup, InputRightElement, Icon } from "@chakra-ui/react";
+import { Container, Box, Flex, Text, Heading, Image, TagLabel, Button, Input, InputGroup, InputRightElement, Icon, Hide } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon } from "@chakra-ui/icons";
+import { api } from "../services/api";
 
 export default function Home() {
   const [ show, setShow ] = useState(false);
   const handleClick = () => setShow(!show);
+
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+  
+  async function handleSignIn(){
+    await api.post('auth/login', { email, password });
+  }
 
 
   return (
@@ -16,19 +24,21 @@ export default function Home() {
         m="auto" 
         justifyContent="space-evenly"
       >
-      <Flex direction="column" gap={3}>
-        <Box h="80%">
-          <Image src="/images/img-login.svg" objectFit="cover" alt="" height="500px"/>
-        </Box>
+      <Hide below="md">
+        <Flex direction="column" gap={3}>
+          <Box h="80%">
+            <Image src="/images/img-login.svg" objectFit="cover" alt="" height="500px"/>
+          </Box>
         
-        <Box h="20%">
-          <Heading as="h1" color="principalColor" >
-            Bem vindo ao Ponto Go
-          </Heading>
-          <Text color="principalColor" w="381px" textAlign="center" mt={1}>Aqui voce fará toda gestão do  <br />seu sistema de pontos</Text>
-        </Box>
-      
-      </Flex>
+          <Box h="20%">
+            <Heading as="h1" color="principalColor" >
+              Bem vindo ao Ponto Go
+            </Heading>
+            <Text color="principalColor" w="381px" textAlign="center" mt={1}>Aqui voce fará toda gestão do  <br />seu sistema de pontos</Text>
+          </Box>
+        </Flex>
+      </Hide>
+   
 
       <Flex direction="column"justifyContent="center">
         <Image src="/images/logo-pontogo.svg" alt="" />
@@ -38,6 +48,7 @@ export default function Home() {
         <Input
           id="email"
           type="email"
+          onChange={(event) => setEmail(event.target.value)}
           border="1px"
           borderColor="gray.400"
           bg="white"
@@ -52,6 +63,7 @@ export default function Home() {
             id="password"
             bg="white"
             border="1px"
+            onChange={(event) => setPassword(event.target.value)}
             borderColor="gray.400"
             pr='4.5rem'
             type={show ? 'text' : 'password'}
@@ -68,7 +80,7 @@ export default function Home() {
           Esqueci minha senha
         </Text>
 
-        <Button bg="principalColor" _hover={{ background: "#26046e" }} color="white">
+        <Button onClick={() => handleSignIn()} bg="principalColor" _hover={{ background: "#26046e" }} color="white">
           Entrar
         </Button>
 

@@ -21,7 +21,8 @@ export function BasicUsage() {
         <Button onClick={onOpen} w="200px" h="50px" color="white" bg="principalColor" _hover={{ background: "#26046e" }} fontWeight="normal">Registrar ponto</Button>
   
         <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
+          <ModalOverlay  bg='blackAlpha.300'
+      backdropFilter='blur(2px)' />
           <ModalContent w={350}>
             <ModalHeader textAlign="center" mt={10}>Registrar novo ponto</ModalHeader>
             <ModalCloseButton />
