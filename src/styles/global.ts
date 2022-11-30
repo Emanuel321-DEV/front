@@ -12,6 +12,16 @@ export const theme = extendTheme({
     },
     styles: {
         global: {
+            html: {
+                margin: 0,
+                border: 0,
+                boxSizing: "border-box",
+            },
+            div: {
+                margin: 0,
+                border: 0,
+                boxSizing: "border-box",
+            },
             body: {
                 margin: 0,
                 border: 0,

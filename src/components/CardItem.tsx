@@ -16,7 +16,8 @@ export function CardItem( { colaboratorName, id, date, hour } : CardItemProps){
             border="1px"
             borderColor="gray.300"
             borderRadius={2}
-            w={[1140]}
+            boxSizing="border-box"
+            w={[1100]}
             h="73px"
             py={2}
             px={3}

@@ -25,7 +25,12 @@ export default function Home() {
 
   return (
 
-    <Flex justifyContent="center" w="100vw" h="100vh" bg="#ffffffb3">
+    <Flex 
+      justifyContent="center" 
+      w="100vw" 
+      h="100vh" 
+      background="radial-gradient(24.12% 36.12% at 33.33% 45.34%, rgba(138, 83, 255, 0.3) 0%, rgba(151, 105, 249, 0.371071) 28.85%, rgba(161, 123, 244, 0.263119) 71.24%, rgba(153, 109, 248, 0.170476) 89.4%, rgba(138, 83, 255, 0) 100%)"
+    >
       <Flex 
         w="80vw" 
         h="95vh" 

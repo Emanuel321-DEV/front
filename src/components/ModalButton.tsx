@@ -27,7 +27,7 @@ export function BasicUsage() {
 
 
       const res = await api.post('/registered-time', { user: convertUser.id })
-            
+        
       onClose();
     }
 

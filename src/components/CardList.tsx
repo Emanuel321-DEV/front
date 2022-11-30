@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 import { Table } from "react-chakra-pagination";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { ButtonGroup, ChakraProvider } from "@chakra-ui/react";
 
 // Use Chakra Ui for create a custom component for display field date in table
 import {
@@ -18,6 +18,8 @@ import {
 
 // Recommended for icons
 import { FiTrash2, FiUser } from "react-icons/fi";
+import { CardItem } from "./CardItem";
+import { useState } from "react";
 
 
 type User = {
@@ -28,78 +30,61 @@ type User = {
 
 };
 
-// Example list of users
-// Generated using https://www.mockaroo.com/
-const users: User[] = [
-  {
-    id: 1,
-    colaborador: "Carlin Gwinn",
-    date: "04/11/2009",
-    hour: "18:40",
-    
-  },
-  {
-    id: 2,
-    colaborador: "Yetta Snape",
-    date: "06/08/1989",
-    hour: "18:40",
-  },
-  // ...
-];
 
 export function CardList({ data }) {
-  // Control current Page
-  const [page, setPage] = React.useState(1);
-  console.log("RECEBI ISTO NO DATA \n\n\n\n", data)
-  // Formatter for each user
-  const tableData = data.map((register) => ({
-    colaborador: (
-      <Flex align="center">
-        <Text>{register.user.name}</Text>
-      </Flex>
-    ),
-    date: register.timeRegistered,
-    hour: register.hour,
 
-  }));
 
-  // Accessor to get a date in user object
-  const tableColumns = [
-    {
-      Header: "Colaborador",
-      accessor: "colaborador" as const,
-    },
-    {
-      Header: "date",
-      accessor: "date" as const
-    },
-    {
-      Header: "hour",
-      accessor: "hour" as const
-    },
-  ];
+  const [ init, setInit ] = useState(0);
+  const [ end, setEnd ] = useState(5);
+
+
+  async function ManipuleState(changeInit: number, changeEnd: number){
+
+    setInit(changeInit);
+    setEnd(changeEnd);
+
+  }
 
   return (
-    <Box p="12">
+    <Flex boxSizing="border-box" p="12" pt="8" pl="5" flexDirection="column" w={800} h={600}>
+      
+      <Flex flexDir="column">
+        <Flex w={[620]} justifyContent="space-between">
+          <Text fontWeight="semibold" fontSize={20} >Colaborador</Text>
+          <Text fontWeight="semibold" fontSize={20} >Data</Text>
+          <Text fontWeight="semibold" fontSize={20} >Hour</Text>
+        </Flex>
+        
+        <Flex h={450} w={[800]} flexDir="column" mt={3} gap={5}>
+          
+          {data?.map((register, index) => {
 
-      <Box>
-        <Table
-        colorScheme="messenger"
+              if(index < end && index >= init){
 
-          // Fallback component when list is empty
-          emptyData={{
-            icon: FiUser,
-            text: "Nobody is registered here."
-          }}
-          totalRegisters={users.length}
-          page={page}
-          // Listen change page event and control the current page using state
-          onPageChange={(page) => setPage(page)}
-          columns={tableColumns}
-          data={tableData}
-        />
-      </Box>
-    </Box>
+                return (
+                  <CardItem id={register.user.id} hour={register.hour} colaboratorName={register.user.name} date={register.timeRegistered}/> 
+                )   
+              }
+          
+          })
+            
+          }
+        
+        
+        </Flex>
+
+      </Flex>
+
+      <Flex mt={5}>
+        <ButtonGroup>
+          <Button border="1px" borderColor="gray.300" borderRadius={0} onClick={() => ManipuleState(0, 5)}>1</Button>
+          <Button border="1px" borderColor="gray.300" borderRadius={0} onClick={() => ManipuleState(5, 10) }>2</Button>
+          <Button border="1px" borderColor="gray.300" borderRadius={0} onClick={() => ManipuleState(10, 15) }>3</Button>
+          <Button border="1px" borderColor="gray.300" borderRadius={0} onClick={() => ManipuleState(15, 20)}>4</Button>
+        </ButtonGroup>
+      </Flex>
+
+    </Flex>
   );
 }
 

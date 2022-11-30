@@ -16,10 +16,7 @@ export default function Register(){
       
         const convertUser = JSON.parse(userinfo);
         
-        const res = await api.get(`/registered-time/${convertUser.id}`);
-        
-        console.log("RES ====", res)        
-        
+        const res = await api.get(`/registered-time/${convertUser.id}`);        
 
         return res.data;
     });
@@ -29,7 +26,7 @@ export default function Register(){
         <Flex gap={5} width={700}>
             <Navbar title="Meus registros" icon={<Icon color="principalColor" as={SlBookOpen}/>}/>
             
-            <Flex direction="column" mt={9} gap={5}>
+            <Flex direction="column" mt={9} gap={0}>
                 
                 <BasicUsage />
                 {isFetching === true ? <h1>Aguarde</h1> : <CardList data={data}/>
