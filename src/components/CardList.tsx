@@ -22,13 +22,7 @@ import { CardItem } from "./CardItem";
 import { useState } from "react";
 
 
-type User = {
-  id: number;
-  colaborador: string;
-  date: string;
-  hour: string;
 
-};
 
 
 export function CardList({ data }) {

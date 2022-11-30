@@ -17,14 +17,11 @@ export const AuthContext = createContext({} as ContextProps);
 export function AuthContextProvider({ children }){
 
     async function Login({ email, password }){
+
         
-        
-        const response = await api.post('/auth/login', { email, password });
+        try{const response = await api.post('/auth/login', { email, password });
         
         const { token, user } = response.data;
-
-        console.log('THIS IS USER ',user)
-
 
         if(token){
             setCookie(undefined, "next-auth-token", token, {
@@ -37,6 +34,8 @@ export function AuthContextProvider({ children }){
                 path: '/'
             })
 
+            api.defaults.headers['Authorization'] = `Bearer ${token}`
+
             if(user.role === 'ADM'){
                 Router.push('/dashboard')
             } else if(user.role === 'default') {
@@ -46,6 +45,8 @@ export function AuthContextProvider({ children }){
             
         } else {
             return;
+        }} catch(error){
+            console.log(error);
         }
     
     }
@@ -54,8 +55,7 @@ export function AuthContextProvider({ children }){
     async function Logout(){
         destroyCookie(undefined, "next-auth-token");
         destroyCookie(undefined, "next-auth-user");
-        Router.push('/');      
-        
+        Router.push('/');    
     }
 
 

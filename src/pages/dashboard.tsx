@@ -6,15 +6,28 @@ import { RiDashboardLine } from "react-icons/ri";
 import { CardList } from "../components/CardList";
 import { useQuery } from "react-query";
 import { api } from "../services/api";
-
+import Router from 'next/router';
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 
 export default function Dashboard(){
+    const { Logout } = useContext(AuthContext);
+    
     const { data, isError, isFetching } = useQuery('registers-func', async () => {
-        const res = await api.get('/registered-time');
+        
 
+        const res = await api.get('/registered-time');
+        
+        console.log("ESTE EH RESPONSE", res);
         return res.data;
+        
+
     });
+
+    if(isError){
+        Logout();
+    }
 
 
     return(
@@ -25,7 +38,7 @@ export default function Dashboard(){
             <Flex direction="column" mt={9} gap={5}>
 
 
-            {isFetching === true ? <h1>Aguarde</h1> : <CardList data={data}/>}
+            {isFetching === true ? <h1>Aguarde</h1> : isError === true ? <h1>Erro</h1>:<CardList data={data}/>}
 
             </Flex>
         

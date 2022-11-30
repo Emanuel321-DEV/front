@@ -14,10 +14,14 @@ import {
 import { TimeIcon } from "@chakra-ui/icons";
 import { parseCookies } from 'nookies';
 import { api } from '../services/api';
+import { useEffect, useState } from 'react';
+import { format, setDate } from 'date-fns';
 
 export function BasicUsage() {
     
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [ dateCurrent, setDateCurrent ] = useState('');
+    const [ hourCurrent, setHourCurrent ] = useState('');
 
     async function handleRegister (){
 
@@ -31,6 +35,15 @@ export function BasicUsage() {
       onClose();
     }
 
+    useEffect(()=> {
+      const dateNow = new Date().toLocaleDateString();
+      const hourNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'});
+
+      setDateCurrent(dateNow);
+      setHourCurrent(hourNow);
+
+    }, [])
+
     return (
       <>
         <Button onClick={onOpen} w="200px" h="50px" color="white" bg="principalColor" _hover={{ background: "#26046e" }} fontWeight="normal" >Registrar ponto</Button>
@@ -43,10 +56,10 @@ export function BasicUsage() {
             <ModalCloseButton />
             <ModalBody display="flex" flexDirection="column" alignItems="center" >
               <TimeIcon fontSize="6xl" color="principalColor"/>
-              <Heading  m={2} as="h2" color="principalColor">
-                10:30
+              <Heading  m={2} as="h3" color="principalColor">
+                {hourCurrent}
               </Heading>
-              <Text>26/09/2021</Text>
+              <Text>{dateCurrent}</Text>
             </ModalBody>
   
             <ModalFooter display="flex" flexDirection="column" gap={2} mb={10}>

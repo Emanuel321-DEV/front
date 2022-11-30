@@ -8,8 +8,13 @@ import { CardList } from "../components/CardList";
 import { api } from "../services/api";
 import { parseCookies } from "nookies";
 import { useQuery } from "react-query";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 
 export default function Register(){
+
+    const { Logout } = useContext(AuthContext);
+    
     const { data, isError, isFetching } = useQuery('registers-func', async () => {
 
         const { 'next-auth-user': userinfo} = parseCookies();
@@ -21,15 +26,23 @@ export default function Register(){
         return res.data;
     });
 
+
+    if(isError){
+        Logout();
+    }
+
+
+    
+
     return(
         
-        <Flex gap={5} width={700}>
+        <Flex gap={5} width="80vw">
             <Navbar title="Meus registros" icon={<Icon color="principalColor" as={SlBookOpen}/>}/>
             
             <Flex direction="column" mt={9} gap={0}>
                 
                 <BasicUsage />
-                {isFetching === true ? <h1>Aguarde</h1> : <CardList data={data}/>
+                {isFetching === true ? <h1>Aguarde</h1> : isError === true ? <h1>Erro</h1> :<CardList data={data}/>
 }
                 
             </Flex>
