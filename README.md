@@ -13,13 +13,14 @@
     3 Into project directory execute 'npm i' or 'yarn' (Install all dependencies) 
     4 Into project directory execute 'npm run dev' or 'yarn dev'
 
-# !!IMPORTANTE!!
+# !!IMPORTANT!!
 
 ## Users for test (email, password)
-john@example.com 0000000
-andre@example.com 1111111
-carla@test.com    2222222
-cris.faria@gmail.com 3333333
+    
+    john@example.com 0000000 (ADM)
+    andre@example.com 1111111 (ADM)
+    carla@test.com    2222222 (common user)
+    cris.faria@gmail.com 3333333 (common user)
 
 ## Main tecnologies
 
